@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, DatePicker, Select, Form, message } from "antd";
 import axios from "axios";
+import { RiContactsBook3Line } from "react-icons/ri";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -87,7 +88,10 @@ const SubmitPage: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Submit Page</h1>
+      <div className="flex iterms-center gap-2">
+      <RiContactsBook3Line size={30} />
+      <h1 className="text-2xl">Submit Managerment</h1>
+      </div>
 
       {/* Filter Section */}
       <div className="bg-white p-4 rounded mb-6">
@@ -95,7 +99,7 @@ const SubmitPage: React.FC = () => {
           <Form.Item label="User">
             <Select
               placeholder="Select user"
-              className="w-48"
+              className="min-w-[200px]"
               allowClear
               onChange={(value) =>
                 handleFilterChange({ userId: value || null })

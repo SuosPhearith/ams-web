@@ -14,7 +14,7 @@ import { FiLogOut } from "react-icons/fi";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
-import { RiBuilding4Line } from "react-icons/ri";
+import { RiBuilding4Line, RiContactsBook3Line } from "react-icons/ri";
 import { SiGoogleclassroom } from "react-icons/si";
 import { LuBookType, LuUsers } from "react-icons/lu";
 import BuildingPage from "./pages/BuildingPage";
@@ -45,8 +45,8 @@ const App: React.FC = () => {
     },
     {
       key: "/submit",
-      icon: <RiBuilding4Line />,
-      label: <Link to="/submit">Building</Link>,
+      icon: <RiContactsBook3Line/>,
+      label: <Link to="/submit">Submit</Link>,
     },
     {
       key: "/building",
