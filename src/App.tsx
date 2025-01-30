@@ -23,6 +23,7 @@ import UserPage from "./pages/UserPage";
 import AssignPage from "./pages/AssignPage";
 import CoursePage from "./pages/CoursePage";
 import TimetablePage from "./pages/TimetablePage";
+import SubmitPage from "./pages/SubmitPage";
 
 const { Sider, Content } = Layout;
 
@@ -41,6 +42,11 @@ const App: React.FC = () => {
       key: "/",
       icon: <RxDashboard />,
       label: <Link to="/">Dashboard</Link>,
+    },
+    {
+      key: "/submit",
+      icon: <RiBuilding4Line />,
+      label: <Link to="/submit">Building</Link>,
     },
     {
       key: "/building",
@@ -123,6 +129,7 @@ const App: React.FC = () => {
             <Route path="/assign/:id" element={<AssignPage />} />
             <Route path="/timetable/:id" element={<TimetablePage />} />
             <Route path="/course" element={<CoursePage />} />
+            <Route path="/submit" element={<SubmitPage />} />
           </Routes>
         </Content>
       </Layout>
