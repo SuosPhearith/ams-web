@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Form, Input, Select, message } from "antd";
+import { Table, Button, Modal, Form, Input, Select, message, Popconfirm } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { RiBuilding4Line, RiDeleteBin3Line } from "react-icons/ri";
+import { FiPlusCircle } from "react-icons/fi";
+import { LiaEdit } from "react-icons/lia";
+import { GrSchedules } from "react-icons/gr";
 
 const { Option } = Select;
 
@@ -84,8 +88,11 @@ const UserPage: React.FC = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-semibold">User Management</h1>
-        <Button type="primary" onClick={() => openModal()}>Add User</Button>
+        <div className="flex items-center gap-2">
+          <RiBuilding4Line size={30} />
+          <h1 className="text-2xl">User Management</h1>
+        </div>
+        <Button type="primary" onClick={() => openModal()}> <FiPlusCircle />Add</Button>
       </div>
 
       <Table dataSource={users} rowKey="id" loading={loading} pagination={false}>
@@ -97,9 +104,18 @@ const UserPage: React.FC = () => {
           key="actions"
           render={(_, user: User) => (
             <div className="space-x-2">
-              <Button type="link" onClick={() => openModal(user)}>Edit</Button>
-              <Button type="link" danger onClick={() => deleteUser(user.id)}>Delete</Button>
-              <Button type="link" onClick={() => navigate(`/timetable/${user.id}`)}>Timetable</Button>
+              <Button type="link" onClick={() => openModal(user)}><LiaEdit size={23} /></Button>
+              <Popconfirm
+                title="Are you sure to delete this user?"
+                onConfirm={() => deleteUser(user.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="link" danger>
+                  <RiDeleteBin3Line size={20} />
+                </Button>
+              </Popconfirm>
+              <Button type="link" onClick={() => navigate(`/timetable/${user.id}`)}><GrSchedules size={20} /></Button>
             </div>
           )}
         />

@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'KantumruyPro';
+    src: url('/src/assets/fonts/KantumruyPro-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+
+  }
+  * {
+    font-family: 'KantumruyPro', sans-serif;
+  }
+  

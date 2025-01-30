@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Form, Input, message } from "antd";
+import { Table, Button, Modal, Form, Input, message, Popconfirm } from "antd";
 import axios from "axios";
+import { RiBuilding4Line, RiDeleteBin3Line } from "react-icons/ri";
+import { FiPlusCircle } from "react-icons/fi";
+import { LiaEdit } from "react-icons/lia";
+import { LuBookType } from "react-icons/lu";
 
 interface Course {
   id: number;
@@ -80,11 +84,14 @@ const CoursePage: React.FC = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-semibold">Course Management</h1>
-        <Button type="primary" onClick={() => openModal()}>Add Course</Button>
+        <div className="flex items-center gap-2">
+          <LuBookType size={30} />
+          <h1 className="text-2xl">Course Management</h1>
+        </div>
+        <Button type="primary" onClick={() => openModal()}><FiPlusCircle />Add</Button>
       </div>
 
-      <Table dataSource={courses} rowKey="id" loading={loading}>
+      <Table dataSource={courses} rowKey="id" loading={loading} pagination={false}>
         <Table.Column title="Course Name" dataIndex="name" key="name" />
         <Table.Column title="Code" dataIndex="code" key="code" />
         <Table.Column title="Description" dataIndex="description" key="description" />
@@ -93,8 +100,18 @@ const CoursePage: React.FC = () => {
           key="actions"
           render={(_, course: Course) => (
             <div className="space-x-2">
-              <Button type="link" onClick={() => openModal(course)}>Edit</Button>
-              <Button type="link" danger onClick={() => deleteCourse(course.id)}>Delete</Button>
+              <Button type="link" onClick={() => openModal(course)}><LiaEdit size={23} /></Button>
+              <Popconfirm
+                title="Are you sure to delete this course?"
+                onConfirm={() => deleteCourse(course.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="link" danger>
+                  <RiDeleteBin3Line size={20} />
+                </Button>
+              </Popconfirm>
+
             </div>
           )}
         />
@@ -112,7 +129,7 @@ const CoursePage: React.FC = () => {
             <Input />
           </Form.Item>
 
-          <Form.Item name="code" label="Course Code" rules={[{ required: true, message: "Please enter course code" }]}>
+          <Form.Item name="code" label="Course Code" >
             <Input />
           </Form.Item>
 

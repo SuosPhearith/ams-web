@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Form, Select, message } from "antd";
+import { Table, Button, Modal, Form, Select, message, Popconfirm } from "antd";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { CgAssign } from "react-icons/cg";
+import { FiPlusCircle } from "react-icons/fi";
+import { LiaEdit } from "react-icons/lia";
+import { RiDeleteBin3Line } from "react-icons/ri";
 
 const { Option } = Select;
 
@@ -148,9 +152,12 @@ const AssignPage: React.FC = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-semibold">Assign Schedules</h1>
+        <div className="flex items-center gap-2">
+          <CgAssign size={30} />
+          <h1 className="text-xl font-semibold">Assign Schedules</h1>
+        </div>
         <Button type="primary" onClick={() => openModal()}>
-          Assign Schedule
+          <FiPlusCircle size={20} />Schedule
         </Button>
       </div>
 
@@ -169,9 +176,9 @@ const AssignPage: React.FC = () => {
           render={(schedule) => (
             <div className="flex flex-col items-center">
               <div className="text-sm text-blue-600">
-                {schedule.time7_9_am_course?.name || "Unassigned"}
+                {schedule.time7_9_am_course?.name || "-"}
               </div>
-              <div>{schedule.time7_9_am_teacher?.name || "Unassigned"}</div>
+              <div>{schedule.time7_9_am_teacher?.name || "-"}</div>
             </div>
           )}
         />
@@ -182,9 +189,9 @@ const AssignPage: React.FC = () => {
           render={(schedule) => (
             <div className="flex flex-col items-center">
               <div className="text-sm text-blue-600">
-                {schedule.time9_11_am_course?.name || "Unassigned"}
+                {schedule.time9_11_am_course?.name || "-"}
               </div>
-              <div>{schedule.time9_11_am_teacher?.name || "Unassigned"}</div>
+              <div>{schedule.time9_11_am_teacher?.name || "-"}</div>
             </div>
           )}
         />
@@ -195,9 +202,9 @@ const AssignPage: React.FC = () => {
           render={(schedule) => (
             <div className="flex flex-col items-center">
               <div className="text-sm text-blue-600">
-                {schedule.time1_3_pm_course?.name || "Unassigned"}
+                {schedule.time1_3_pm_course?.name || "-"}
               </div>
-              <div>{schedule.time1_3_pm_teacher?.name || "Unassigned"}</div>
+              <div>{schedule.time1_3_pm_teacher?.name || "-"}</div>
             </div>
           )}
         />
@@ -208,9 +215,9 @@ const AssignPage: React.FC = () => {
           render={(schedule) => (
             <div className="flex flex-col items-center">
               <div className="text-sm text-blue-600">
-                {schedule.time3_5_pm_course?.name || "Unassigned"}
+                {schedule.time3_5_pm_course?.name || "-"}
               </div>
-              <div>{schedule.time3_5_pm_teacher?.name || "Unassigned"}</div>
+              <div>{schedule.time3_5_pm_teacher?.name || "-"}</div>
             </div>
           )}
         />
@@ -221,15 +228,19 @@ const AssignPage: React.FC = () => {
           render={(_, schedule: Schedule) => (
             <div className="space-x-2">
               <Button type="link" onClick={() => openModal(schedule)}>
-                Edit
+                <LiaEdit size={23} />
               </Button>
-              <Button
-                type="link"
-                danger
-                onClick={() => deleteSchedule(schedule.id)}
+              <Popconfirm
+                title="Are you sure to delete this schedule?"
+                onConfirm={() => deleteSchedule(schedule.id)}
+                okText="Yes"
+                cancelText="No"
               >
-                Delete
-              </Button>
+                <Button type="link" danger>
+                  <RiDeleteBin3Line size={20} />
+                </Button>
+              </Popconfirm>
+
             </div>
           )}
         />

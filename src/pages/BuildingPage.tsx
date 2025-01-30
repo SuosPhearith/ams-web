@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Table, Modal, Form, Input, Button, message, Popconfirm } from "antd";
 import axios from "axios";
+import { RiBuilding4Line, RiDeleteBin3Line } from "react-icons/ri";
+import { FiPlusCircle } from "react-icons/fi";
+import { LiaEdit } from "react-icons/lia";
+
 
 interface Building {
   id: number;
@@ -81,9 +85,9 @@ const BuildingPage: React.FC = () => {
       title: "Actions",
       key: "actions",
       render: (_: any, record: Building) => (
-        <div className="flex gap-2">
+        <div className="flex">
           <Button type="link" onClick={() => showModal(record)}>
-            Edit
+          <LiaEdit size={23} />
           </Button>
           <Popconfirm
             title="Are you sure to delete this building?"
@@ -92,7 +96,7 @@ const BuildingPage: React.FC = () => {
             cancelText="No"
           >
             <Button type="link" danger>
-              Delete
+            <RiDeleteBin3Line size={20} />
             </Button>
           </Popconfirm>
         </div>
@@ -101,14 +105,19 @@ const BuildingPage: React.FC = () => {
   ];
 
   return (
-    <div className="p-6 mx-auto shadow-md rounded-lg">
+    <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-      <h1 className="text-2xl font-bold mb-4">Building Management</h1>
-      <Button type="primary" onClick={() => showModal()} className="mb-4">
-        Add Building
-      </Button>
+
+        <div className="flex items-center gap-2">
+          <RiBuilding4Line size={30}/>
+          <h1 className="text-2xl">Building Management</h1>
+        </div>
+
+        <Button type="primary" onClick={() => showModal()} className="mb-4">
+        <FiPlusCircle />Add
+        </Button>
       </div>
-      <Table className="w-full" columns={columns} dataSource={buildings} rowKey="id" loading={loading} pagination={false}/>
+      <Table className="w-full" columns={columns} dataSource={buildings} rowKey="id" loading={loading} pagination={false} />
 
       {/* Add / Edit Modal */}
       <Modal

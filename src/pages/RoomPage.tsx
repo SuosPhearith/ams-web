@@ -8,9 +8,15 @@ import {
   Select,
   Switch,
   message,
+  Popconfirm,
 } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { RiCalendarScheduleLine, RiDeleteBin3Line } from "react-icons/ri";
+import { LiaEdit } from "react-icons/lia";
+import { SiGoogleclassroom } from "react-icons/si";
+import { FiPlusCircle } from "react-icons/fi";
+
 
 const { Option } = Select;
 
@@ -120,9 +126,12 @@ const RoomPage: React.FC = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-semibold">Room Management</h1>
+        <div className="flex items-center gap-2">
+      <SiGoogleclassroom size={30}/>
+        <h1 className="text-2xl">Room Management</h1>
+        </div>
         <Button type="primary" onClick={() => openModal()}>
-          Add Room
+          <FiPlusCircle />Add
         </Button>
       </div>
 
@@ -149,19 +158,27 @@ const RoomPage: React.FC = () => {
           title="Actions"
           key="actions"
           render={(_, room: Room) => (
-            <div className="space-x-2">
+            <div className="space-x-2 items-center">
               <Button type="link" onClick={() => openModal(room)}>
-                Edit
+                <LiaEdit size={23} />
               </Button>
               <Button
                 type="link"
                 onClick={() => navigate(`/assign/${room.id}`)}
               >
-                Assign
+                <RiCalendarScheduleLine size={20} />
               </Button>
-              <Button type="link" danger onClick={() => deleteRoom(room.id)}>
-                Delete
-              </Button>
+
+              <Popconfirm
+                title="Are you sure to delete this room?"
+                onConfirm={() => deleteRoom(room.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="link" danger>
+                  <RiDeleteBin3Line size={20} />
+                </Button>
+              </Popconfirm>
             </div>
           )}
         />

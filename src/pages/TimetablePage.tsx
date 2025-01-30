@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { RxLapTimer } from "react-icons/rx";
 
 interface Timetable {
   [day: string]: {
@@ -40,9 +41,12 @@ const TimetablePage: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Timetable</h1>
+      <div className="flex items-center gap-2">
+        <RxLapTimer size={30} />
+        <h1 className="text-2xl ">Timetable</h1>
+      </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mt-5">
         <table className="min-w-full border-collapse border border-gray-200 text-center">
           <thead className="bg-gray-100">
             <tr>
@@ -66,7 +70,7 @@ const TimetablePage: React.FC = () => {
                     Object.keys(timetable).map((day) => (
                       <td
                         key={`${day}-${time}`}
-                        className="border border-gray-300 px-4 py-2 bg-teal-100"
+                        className="border border-gray-300 px-4 py-2"
                       >
                         {timetable[day][time]?.map((entry, index) => (
                           <div key={index} className="mb-2">
@@ -76,7 +80,7 @@ const TimetablePage: React.FC = () => {
                               {entry.teacher}
                             </div>
                           </div>
-                        )) || <span>Unassigned</span>}
+                        )) || <span>_</span>}
                       </td>
                     ))}
                 </tr>
